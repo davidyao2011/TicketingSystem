@@ -1,7 +1,23 @@
+/*
+ * The program implements ticketing system in the shop
+ * Every 3 seconds a new customer arrives and is given a numbered ticket
+ * Every 5 seconds a sales is ready to see a customer if there is any
+ * Customers are seen in the order of their arrival to the shop
+ *
+ */
+
+
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
+
+
+/**
+ *
+ * @author David Yao
+ */
 
 
 public class TicketingSystem {
@@ -16,14 +32,16 @@ public class TicketingSystem {
 
         Timer timer = new Timer();
 
+        //timed event - first customer in line to be seen, if there are any customers
         timer.schedule(new TicketServingTask(), 0, 5000);
 
+        //timed event - adding new customer on their arrival
         timer.schedule(new AddCustomers(), 0, 3000);
 
 
     }
 
-
+    //inner class to describe the task of serving ticket to the first customer in a queue
     public static class TicketServingTask extends TimerTask {
 
         public void run() {
@@ -40,6 +58,7 @@ public class TicketingSystem {
         }
     }
 
+    //inner class to describe the task of adding customer in a queue
     public static class AddCustomers extends TimerTask {
 
         public void run() {
